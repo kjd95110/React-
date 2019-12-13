@@ -1,0 +1,122 @@
+<html>
+    <head>
+            <meta charset="UTF-8" />
+            <title>리액트로 구현하는 구구단</title>
+<script crossorigin src="https://unpkg.com/react@16/umd/react.development.js"></script>
+<script crossorigin src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
+<script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+<!-- 실제배포시 <script crossorigin src="https://unpkg.com/react@16/umd/react.production.js"></script> -->
+<!-- 실제배포시 <script crossorigin src="https://unpkg.com/react-dom@16/umd/react-dom.production.js"></script> -->
+<!-- onload="document.getElementById('inputnum').focus();" -->
+
+    </head>
+
+    <body >
+        <div id="root"></div>
+        <script type="text/babel">
+            const e = React.createElement;
+            class GuGuDan extends React.Component{
+                constructor(props){
+                    super(props);
+                     //상태(state)는 바뀌는 부분이다. 바뀔수 있는 부분.
+                    this.state={
+                        first: Math.ceil(Math.random() * 9),
+                        second: Math.ceil(Math.random() * 9),
+                        inputvalue: '',
+                        result: '',
+                    }
+                }
+
+                onSubmit= (e) => {
+
+                    /*
+
+
+                    setState 사용법.
+
+                        보통은 객체쓰는데
+                        
+                        setState 안에 this.state가 들어가면  함수를 쓰는것으로 하자.
+                        예전값의 setState값으로  현재(미래-새로운) setState값을 변경(만들때는) 리턴을 해주는 함수로 바꿔서 사용할것을 권장합니다.
+
+                        this.setState((prevState) => { 
+                            return{
+                                value:prevState.value + 1;
+                            };
+                        });
+
+
+
+                    */
+
+                    e.preventDefault();
+                        if(parseInt(this.state.inputvalue,10) === this.state.first * this.state.second){
+                            this.setState((prevState) =>  {  //예전상태값(바뀌기전의 상태값)
+                                return {
+                                result: parseInt(prevState.inputvalue,10) + ' 정답 ',
+                                first:Math.ceil(Math.random() * 9 ),
+                                second:Math.ceil(Math.random() * 9 ),
+                                inputvalue:'',
+                            }
+                            });
+
+                            this.input.focus();
+
+                        }else{
+                            this.setState({
+                                result: parseInt(this.state.inputvalue,10) + ' 땡',
+                                inputvalue:'',
+                            });
+                        }
+
+                };
+
+               onChange = (e) => {
+                   this.setState({ inputvalue: e.target.value});
+               } 
+
+            //    onLoad = (e) => {
+            //     //    setTimeout(function(){
+            //     //     document.getElementById('inputnum').focus();
+            //     //    },1000);
+            //     console.log('test');
+                 
+            //    }
+
+
+            input;
+
+            onRefInput = (c) => {
+                this.input = c;
+            }
+               componentDidMount(){
+                  
+                }
+
+                render(){
+
+                    console.log('렌더링'); //setState가 변경되면 다시 화면이  그려진다(render() 함수가 로딩되므로 )....는걸 아셔야 합니다.
+                    //최적화하는데 많은 시간이 걸리므로 이부분을 신경많이 써야한다.
+                    //위에 메소드로직을 많이 빼놓음으로써 많은 시간을 줄일수 있다.
+                    //input.onchange = (e) => { console.log(e.target.value)}
+                    //onClick, onChange, onSubmit,onLoad,onInput,onFocus,onBlur
+                    return(
+                        <React.Fragment>
+                        <div>{this.state.first} 곱하기 { this.state.second} 는 ? </div>
+                        <form  onSubmit={ this.onSubmit }> 
+
+                            <input ref={ this.onRefInput} id="inputnum" type="number"  value={this.state.inputvalue } onChange={this.onChange} />                        
+                            <button>입력!</button>
+                        </form>
+                        <div>{this.state.result }</div>
+                        </React.Fragment>                   
+                    );
+                }
+
+            }
+        </script>
+       <script type="text/babel">
+            ReactDOM.render(<GuGuDan />, document.querySelector('#root')); //실제로 rendering됨.
+        </script>
+    </body>
+</html>
