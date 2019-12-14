@@ -1,0 +1,49 @@
+<html>
+    <head>
+<script crossorigin src="https://unpkg.com/react@16/umd/react.development.js"></script>
+<script crossorigin src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
+<script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+<!-- 실제배포시 <script crossorigin src="https://unpkg.com/react@16/umd/react.production.js"></script> -->
+<!-- 실제배포시 <script crossorigin src="https://unpkg.com/react-dom@16/umd/react-dom.production.js"></script> -->
+
+
+    </head>
+
+    <body>
+        <div id="root"></div>
+        <script type="text/babel">
+            const e = React.createElement;
+            class LikeButton extends React.Component{
+                constructor(props){
+                    super(props);
+                     //상태(state)는 바뀌는 부분이다. 바뀔수 있는 부분.
+                    this.state={
+                        liked: false,
+
+                    }
+                }
+
+                render(){
+                    // return e('button',{ onClick: () => { this.setState({ liked: true })} ,type:'submit' } ,
+                    // this.state.liked ===true ? 'Liked' : 'Like' );
+
+                    return <button type="submit" onClick= { () => { this.setState({ liked: true})  }  }> 
+                    {this.state.liked ===true ? 'Liked' : 'Like'}
+                     </button>;
+
+                    //JSX (JS + XML )
+
+                    
+                    //return e('button',{ onClick: () => { console.log('clicked')} ,type:'submit' } , 'Like' );
+                    //return e('button', null, 'Like'); //<button>Like</button> 만들겠다. will  강조
+                    //<button onclick="() => { console.log('clicked') } " type="submit"> Like</button>
+                    //상태(state)는 바뀌는 부분이다. 바뀔수 있는 부분.
+                }
+
+            }
+        </script>
+       <script type="text/babel">
+            ReactDOM.render(<div><LikeButton /><LikeButton /><LikeButton /><LikeButton /><LikeButton /><LikeButton /><LikeButton /><LikeButton /><LikeButton /><LikeButton /></div>, document.querySelector('#root')); //실제로 rendering됨.
+        </script>
+    </body>
+</html>

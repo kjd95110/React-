@@ -1,0 +1,33 @@
+{
+  "name": "gugudan",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "dev": "webpack",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kjd95110/ReactZerocho.git"
+  },
+  "author": "kimjd",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/kjd95110/ReactZerocho/issues"
+  },
+  "homepage": "https://github.com/kjd95110/ReactZerocho#readme",
+  "dependencies": {
+    "react": "^16.12.0",
+    "react-dom": "^16.12.0"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.7.5",
+    "@babel/plugin-proposal-class-properties": "^7.7.4",
+    "@babel/preset-env": "^7.7.6",
+    "@babel/preset-react": "^7.7.4",
+    "babel-loader": "^8.0.6",
+    "webpack": "^4.41.2",
+    "webpack-cli": "^3.3.10"
+  }
+}
